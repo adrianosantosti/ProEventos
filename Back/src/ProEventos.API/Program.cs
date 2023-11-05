@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
+builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataContext>(
         options => options.UseSqlite("name=ConnectionStrings:Default"));
@@ -32,6 +33,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.MapControllers();
 
